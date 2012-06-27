@@ -6,7 +6,6 @@
 		<artifactId>htmlwidgets</artifactId>
 		<version>1.6.1-SNAPSHOT</version>
 	</parent>
-	<groupId>org.openmrs.module</groupId>
 	<artifactId>htmlwidgets-api</artifactId>
 	<packaging>jar</packaging>
 	<name>HTML Widgets API</name>
@@ -24,17 +23,18 @@
 		<dependency>
 			<groupId>org.openmrs.api</groupId>
 			<artifactId>openmrs-api</artifactId>
-			<type>jar</type>
 		</dependency>
+
 		<dependency>
-			<groupId>org.openmrs.web</groupId>
-			<artifactId>openmrs-web</artifactId>
-			<type>jar</type>
+			<groupId>org.openmrs.api</groupId>
+			<artifactId>openmrs-api</artifactId>
+			<classifier>tests</classifier>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.openmrs.test</groupId>
 			<artifactId>openmrs-test</artifactId>
-			<type>jar</type>
+			<type>pom</type>
 		</dependency>
 	</dependencies>
 
