@@ -28,6 +28,7 @@ public interface HtmlWidgetsService extends OpenmrsService {
 
 	/**
 	 * @return all OpenmrsMetadata of the passed type
+	 * @should return only unretired
 	 */
 	@Transactional(readOnly = true)
 	public <T extends OpenmrsMetadata> List<T> getAllMetadataByType(Class<T> type, boolean includeRetired);
