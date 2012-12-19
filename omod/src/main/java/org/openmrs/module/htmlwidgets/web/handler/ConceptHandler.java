@@ -58,6 +58,26 @@ public class ConceptHandler extends CodedHandler {
 			}
 		}
 		config.setDefaultAttribute("ajaxUrl", url.toString());
+
+		Object defaultValue = config.getDefaultValue();
+		if (defaultValue != null && StringUtils.isNotEmpty(defaultValue.toString()) && !(defaultValue instanceof Concept)) {
+			// If the defaultValue passed in is not null and not a Concept, try converting it to one
+			Concept convertedDefaultValue = null;
+			try {
+				// First by id
+				convertedDefaultValue = Context.getConceptService().getConcept(Integer.parseInt(defaultValue.toString()));
+			}
+			catch (Exception e) {
+				// And if that fails, then by uuid
+				convertedDefaultValue = Context.getConceptService().getConceptByUuid(defaultValue.toString());
+			}
+			if (convertedDefaultValue != null) {
+				defaultValue = convertedDefaultValue;
+			}
+			else {
+				throw new IllegalArgumentException("Default value of " + defaultValue + " is not able to be converted to a Concept");
+			}
+		}
 	}
 
 	/** 
