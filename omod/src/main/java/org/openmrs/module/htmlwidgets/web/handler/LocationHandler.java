@@ -52,7 +52,8 @@ public class LocationHandler  extends OpenmrsMetadataHandler<Location> {
 		fieldGenTag.setType("org.openmrs.Location");
 		fieldGenTag.setFormFieldName(config.getAttributeValue("name"));
 		fieldGenTag.setUrl("location.field");
-		fieldGenTag.setVal(config.getDefaultValue());
+		fieldGenTag.setVal( ( config.getDefaultValue() == null || config.getDefaultValue() == "") ? 
+					config.getDefaultValue() : new Location( new Integer( (String ) config.getDefaultValue() ) ) );
 		Map<String, Object> parameterMap = fieldGenTag.getParameterMap();
 		if (parameterMap == null) {
 			parameterMap = new HashMap<String, Object>();
