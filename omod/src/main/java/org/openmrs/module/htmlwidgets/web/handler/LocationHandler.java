@@ -20,6 +20,7 @@ import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 
+import org.apache.commons.lang.StringUtils;
 import org.openmrs.Location;
 import org.openmrs.annotation.Handler;
 import org.openmrs.module.htmlwidgets.web.WidgetConfig;
@@ -52,7 +53,8 @@ public class LocationHandler  extends OpenmrsMetadataHandler<Location> {
 		fieldGenTag.setType("org.openmrs.Location");
 		fieldGenTag.setFormFieldName(config.getAttributeValue("name"));
 		fieldGenTag.setUrl("location.field");
-		fieldGenTag.setVal(config.getDefaultValue());
+		fieldGenTag.setVal( StringUtils.isBlank( ( String )config.getDefaultValue() ) ? config.getDefaultValue() 
+				: new Location( new Integer( (String ) config.getDefaultValue() ) ) );
 		Map<String, Object> parameterMap = fieldGenTag.getParameterMap();
 		if (parameterMap == null) {
 			parameterMap = new HashMap<String, Object>();
