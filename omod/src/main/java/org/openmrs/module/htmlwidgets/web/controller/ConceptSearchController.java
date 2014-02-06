@@ -47,6 +47,9 @@ public class ConceptSearchController {
     	List<Locale> l = new Vector<Locale>();
     	l.add(Context.getLocale());
     	List<ConceptWord> words = Context.getConceptService().getConceptWords(query, l, false, includeClasses, null, null, null, questionConcept, null, null);
+    	Concept concept = Context.getConceptService().getConcept(query);
+     	if(concept!=null)
+     	out.print(concept.getName());   
     	for (Iterator<ConceptWord> i = words.iterator(); i.hasNext();) {
     		ConceptWord w = i.next();
     		String ds = w.getConcept().getDisplayString();
