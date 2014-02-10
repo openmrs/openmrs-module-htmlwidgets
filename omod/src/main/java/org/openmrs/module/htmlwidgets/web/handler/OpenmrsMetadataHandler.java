@@ -73,6 +73,6 @@ public abstract class OpenmrsMetadataHandler<T extends OpenmrsMetadata> extends 
 	 * @return whether or not the configuration indicates that retired values should be returned
 	 */
 	public boolean includeRetired(WidgetConfig config) {
-		return config.getAttributeValue("includeRetired", "").equals("true");
+		return config.getAttributeValue("includeRetired", "true").equals("true");
 	}
 }
