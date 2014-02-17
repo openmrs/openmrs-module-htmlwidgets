@@ -14,10 +14,16 @@
 package org.openmrs.module.htmlwidgets.service;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
+import org.openmrs.Concept;
+import org.openmrs.ConceptClass;
+import org.openmrs.ConceptDatatype;
+import org.openmrs.ConceptWord;
 import org.openmrs.OpenmrsMetadata;
 import org.openmrs.OpenmrsObject;
+import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +38,11 @@ public interface HtmlWidgetsService extends OpenmrsService {
 	 */
 	@Transactional(readOnly = true)
 	public <T extends OpenmrsMetadata> List<T> getAllMetadataByType(Class<T> type, boolean includeRetired);
+	
+	public List<ConceptWord> getConceptsList(String phrase, List<Locale> locales, boolean includeRetired,
+        List<ConceptClass> requireClasses, List<ConceptClass> excludeClasses, List<ConceptDatatype> requireDatatypes,
+        List<ConceptDatatype> excludeDatatypes, Concept answersToConcept, Integer start, Integer size)
+        throws APIException;
 	
 	/**
 	 * @return all OpenmrsObjects of the passed type

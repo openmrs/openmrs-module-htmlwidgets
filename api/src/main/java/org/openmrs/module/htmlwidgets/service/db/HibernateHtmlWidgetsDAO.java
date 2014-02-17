@@ -2,7 +2,9 @@ package org.openmrs.module.htmlwidgets.service.db;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
@@ -11,10 +13,17 @@ import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Order;
+import org.openmrs.Concept;
+import org.openmrs.ConceptClass;
+import org.openmrs.ConceptDatatype;
+import org.openmrs.ConceptName;
+import org.openmrs.ConceptWord;
 import org.openmrs.OpenmrsMetadata;
 import org.openmrs.OpenmrsObject;
 import org.openmrs.Retireable;
 import org.openmrs.Voidable;
+import org.openmrs.api.context.Context;
+import org.openmrs.api.db.DAOException;
 import org.openmrs.module.htmlwidgets.service.HtmlWidgetsService;
 
 /**
@@ -68,6 +77,27 @@ public class HibernateHtmlWidgetsDAO implements HtmlWidgetsDAO {
 	public <T extends OpenmrsObject> T getObject(Class<T> type, Integer id) {
 		return (T) sessionFactory.getCurrentSession().get(type, id);
 	}
+	
+	@Override
+    public List<ConceptWord> getConceptsList(String phrase, List<Locale> locales, boolean includeRetired,
+       List<ConceptClass> requireClasses, List<ConceptClass> excludeClasses, List<ConceptDatatype> requireDatatypes,
+       List<ConceptDatatype> excludeDatatypes, Concept answersToConcept, Integer start, Integer size)
+       throws DAOException {
+		
+		List<ConceptWord> results = new Vector<ConceptWord>();
+		results=Context.getConceptService().getConceptWords(phrase,locales,includeRetired,requireClasses,excludeClasses,requireDatatypes,
+	        excludeDatatypes,answersToConcept,start,size);
+		Concept c = Context.getConceptService().getConcept(phrase);
+		if(c!=null){
+		ConceptName cn=c.getName();
+		ConceptWord cw=new ConceptWord();
+		cw.setConcept(c);
+		cw.setConceptName(cn);
+		results.add(cw);
+		}
+		return results;
+	}
+
 	
 	/**
 	 * @see HtmlWidgetsService#getUserNamesById(Class, String, List)

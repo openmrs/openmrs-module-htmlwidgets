@@ -14,10 +14,16 @@
 package org.openmrs.module.htmlwidgets.service.db;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
+import org.openmrs.Concept;
+import org.openmrs.ConceptClass;
+import org.openmrs.ConceptDatatype;
+import org.openmrs.ConceptWord;
 import org.openmrs.OpenmrsMetadata;
 import org.openmrs.OpenmrsObject;
+import org.openmrs.api.db.DAOException;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -30,6 +36,12 @@ public interface HtmlWidgetsDAO {
 	 */
 	@Transactional(readOnly = true)
 	public <T extends OpenmrsMetadata> List<T> getAllMetadataByType(Class<T> type, boolean includeRetired);
+	
+	public List<ConceptWord> getConceptsList(String phrase, List<Locale> locales, boolean includeRetired,
+        List<ConceptClass> requireClasses, List<ConceptClass> excludeClasses, List<ConceptDatatype> requireDatatypes,
+        List<ConceptDatatype> excludeDatatypes, Concept answersToConcept, Integer start, Integer size)
+        throws DAOException;	
+
 	
 	/**
 	 * @return all OpenmrsObjects of the passed type
