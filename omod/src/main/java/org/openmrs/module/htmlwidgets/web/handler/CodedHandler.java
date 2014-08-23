@@ -41,7 +41,7 @@ public abstract class CodedHandler extends WidgetHandler {
 	}
 	
 	/** 
-	 * @see WidgetHandler#render(WidgetConfig)
+	 * @see WidgetHandler#render(WidgetConfig, Writer)
 	 */
 	@Override
 	public void render(WidgetConfig config, Writer w) throws IOException {
@@ -74,7 +74,10 @@ public abstract class CodedHandler extends WidgetHandler {
 			widget.addOption(new Option("", emptyLabel, emptyCode, null), config);
 		}
 		populateOptions(config, widget);
-		widget.sortOptions();
+		String sortOptions = config.getAttributeValue("sortOptions", "true");
+		if (sortOptions.equals("true")) {
+			widget.sortOptions();
+		}
 		widget.render(config, w);
 	}
 

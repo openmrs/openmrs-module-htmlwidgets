@@ -33,12 +33,25 @@ public class EnumHandler extends CodedHandler {
 		Class<?> c = config.getType();
 		Object[] enums = c.getEnumConstants();
 		if (enums != null) {
-			for (Object o : enums) {
-				widget.addOption(new Option(o.toString(), o.toString(), null, o), config);
+			String optionValues = config.getAttributeValue("optionValues");
+			if (StringUtils.isNotEmpty(optionValues)) {
+				for (String optionValue : optionValues.split(",")) {
+					for (Object enumValue : enums) {
+						String s = enumValue.toString();
+						if (s.equalsIgnoreCase(optionValue.trim())) {
+							widget.addOption(new Option(s, s, null, enumValue), config);
+						}
+					}
+				}
+			}
+			else {
+				for (Object o : enums) {
+					widget.addOption(new Option(o.toString(), o.toString(), null, o), config);
+				}
 			}
 		}
 	}
-	
+
 	/** 
 	 * @see WidgetHandler#parse(String, Class<?>)
 	 */
