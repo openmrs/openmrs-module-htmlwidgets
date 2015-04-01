@@ -9,7 +9,7 @@
 	<author>Partners In Health</author>
 	<description>HTML Form widget library</description>
 	<activator>@MODULE_PACKAGE@.ModuleActivator</activator>
-	<require_version>1.6.0</require_version>
+	<require_version>1.9.2</require_version>
 
 	<!-- Internationalization -->
 	<messages>
