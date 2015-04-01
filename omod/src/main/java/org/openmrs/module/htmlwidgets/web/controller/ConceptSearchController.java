@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.openmrs.Concept;
 import org.openmrs.ConceptClass;
-import org.openmrs.ConceptWord;
+import org.openmrs.ConceptSearchResult;
 import org.openmrs.api.context.Context;
 import org.openmrs.propertyeditor.ConceptClassEditor;
 import org.openmrs.propertyeditor.ConceptEditor;
@@ -46,17 +46,17 @@ public class ConceptSearchController {
 
     	List<Locale> l = new Vector<Locale>();
     	l.add(Context.getLocale());
-    	List<ConceptWord> words = Context.getConceptService().getConceptWords(query, l, false, includeClasses, null, null, null, questionConcept, null, null);
-    	for (Iterator<ConceptWord> i = words.iterator(); i.hasNext();) {
-    		ConceptWord w = i.next();
-    		String ds = w.getConcept().getDisplayString();
-    		if (w.getConceptName().isPreferred() || w.getConceptName().getName().equalsIgnoreCase(ds)) {
-    			out.print(w.getConceptName().getName());
+    	List<ConceptSearchResult> results = Context.getConceptService().getConcepts(query, l, false, includeClasses, null, null, null, questionConcept, null, null);
+    	for (Iterator<ConceptSearchResult> i = results.iterator(); i.hasNext();) {
+    		ConceptSearchResult res = i.next();
+    		String ds = res.getConcept().getDisplayString();
+    		if (res.getConceptName().isPreferred() || res.getConceptName().getName().equalsIgnoreCase(ds)) {
+    			out.print(res.getConceptName().getName());
     		}
     		else {
-    			out.print( w.getConcept().getDisplayString() + " (" + w.getConceptName().getName() + ")");
+    			out.print( res.getConcept().getDisplayString() + " (" + res.getConceptName().getName() + ")");
     		}
-    		out.print("|" + w.getConcept().getId() + (i.hasNext() ? "\n" : ""));
+    		out.print("|" + res.getConcept().getId() + (i.hasNext() ? "\n" : ""));
     	}
     }
 }
