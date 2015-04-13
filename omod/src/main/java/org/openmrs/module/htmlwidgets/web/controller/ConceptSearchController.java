@@ -44,8 +44,8 @@ public class ConceptSearchController {
     	response.setCharacterEncoding("UTF-8");
     	PrintWriter out = response.getWriter();
 
-    	List<Locale> l = new Vector<Locale>();
-    	l.add(Context.getLocale());
+    	List<Locale> l = Context.getAdministrationService().getSearchLocales();
+
     	List<ConceptSearchResult> results = Context.getConceptService().getConcepts(query, l, false, includeClasses, null, null, null, questionConcept, null, null);
     	for (Iterator<ConceptSearchResult> i = results.iterator(); i.hasNext();) {
     		ConceptSearchResult res = i.next();
