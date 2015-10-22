@@ -21,7 +21,7 @@
 						<bean class="org.openmrs.module.htmlwidgets.service.HtmlWidgetsServiceImpl">
 							<property name="dao">
 								<bean class="org.openmrs.module.htmlwidgets.service.db.HibernateHtmlWidgetsDAO">
-									<property name="sessionFactory"><ref bean="sessionFactory"/></property>	
+									<property name="sessionFactory"><ref bean="dbSessionFactory"/></property>	
 								</bean>
 							</property>
 						</bean>
