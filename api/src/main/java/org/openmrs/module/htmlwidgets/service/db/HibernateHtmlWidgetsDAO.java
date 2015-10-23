@@ -8,7 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
-import org.hibernate.SessionFactory;
+import org.openmrs.api.db.hibernate.DbSessionFactory;  
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Order;
 import org.openmrs.OpenmrsMetadata;
@@ -23,7 +23,7 @@ import org.openmrs.module.htmlwidgets.service.HtmlWidgetsService;
 public class HibernateHtmlWidgetsDAO implements HtmlWidgetsDAO {
 	
 	//***** PROPERTIES
-	private SessionFactory sessionFactory;
+	private DbSessionFactory sessionFactory;
 	
 	/**
 	 * Default Constructor
@@ -186,14 +186,14 @@ public class HibernateHtmlWidgetsDAO implements HtmlWidgetsDAO {
 	/**
 	 * @return the sessionFactory
 	 */
-	public SessionFactory getSessionFactory() {
+	public DbSessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 
 	/**
 	 * @param sessionFactory the sessionFactory to set
 	 */
-	public void setSessionFactory(SessionFactory sessionFactory) {
+	public void setSessionFactory(DbSessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 }
