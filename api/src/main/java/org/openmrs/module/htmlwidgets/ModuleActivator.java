@@ -15,26 +15,28 @@ package org.openmrs.module.htmlwidgets;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.module.Activator;
+import org.openmrs.module.BaseModuleActivator;
 
 /**
  * Run every time this module is either started or shutdown
  */
-public class ModuleActivator implements Activator {
+public class ModuleActivator extends BaseModuleActivator {
 
 	private Log log = LogFactory.getLog(this.getClass());
 
 	/**
-	 * @see org.openmrs.module.Activator#startup()
+	 * @see org.openmrs.module.ModuleActivator#started()
 	 */
-	public void startup() {
-		log.info("Starting htmlwidgets Module");
+	@Override
+	public void started() {
+		log.info("Started htmlwidgets Module");
 	}
 	
 	/**
-	 *  @see org.openmrs.module.Activator#shutdown()
+	 * @see org.openmrs.module.ModuleActivator#stopped()
 	 */
-	public void shutdown() {
-		log.info("Shutting down htmlwidgets Module");
+	@Override
+	public void stopped() {
+		log.info("Stopped htmlwidgets Module");
 	}
 }
