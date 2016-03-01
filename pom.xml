@@ -3,7 +3,7 @@
 
 	<groupId>org.openmrs.module</groupId>
 	<artifactId>htmlwidgets</artifactId>
-	<version>1.7.1</version>
+	<version>1.7.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>HTML Widgets</name>
 	<description>Parent project for HTML Widgets</description>
@@ -84,7 +84,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<MODULE_ID>${project.parent.artifactId}</MODULE_ID>
-		<MODULE_NAME>${project.parent.name}</MODULE_NAME>
+		<MODULE_NAME>HTML Widgets</MODULE_NAME>
 		<MODULE_VERSION>${project.parent.version}</MODULE_VERSION>
 		<MODULE_PACKAGE>${project.parent.groupId}.${project.parent.artifactId}</MODULE_PACKAGE>
 	</properties>
