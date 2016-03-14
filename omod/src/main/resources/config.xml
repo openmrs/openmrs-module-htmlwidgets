@@ -11,6 +11,10 @@
 	<activator>@MODULE_PACKAGE@.ModuleActivator</activator>
 	<require_version>1.11.3, 1.10.2 - 1.10.*, 1.9.9 - 1.9.*</require_version>
 
+	<aware_of_modules>
+	    <aware_of_module>org.openmrs.module.legacyui</aware_of_module>
+	</aware_of_modules>
+	
 	<!-- Internationalization -->
 	<messages>
 		<lang>en</lang>

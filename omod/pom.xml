@@ -16,6 +16,12 @@
 			<artifactId>${project.parent.artifactId}-api</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+		<dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>legacyui-omod</artifactId>
+            <version>0.1</version>
+            <scope>provided</scope>
+        </dependency>
 	</dependencies>
 
 	<build>
