@@ -13,16 +13,19 @@
  */
 package org.openmrs.module.htmlwidgets.web.handler;
 
-import java.io.IOException;
-import java.io.Writer;
-
 import org.apache.commons.lang.StringUtils;
 import org.openmrs.annotation.Handler;
 import org.openmrs.module.htmlwidgets.web.WidgetConfig;
+import org.openmrs.module.htmlwidgets.web.html.CodedWidget;
+import org.openmrs.module.htmlwidgets.web.html.Option;
+import org.openmrs.module.htmlwidgets.web.html.SelectWidget;
 import org.openmrs.module.htmlwidgets.web.html.TextAreaWidget;
 import org.openmrs.module.htmlwidgets.web.html.TextWidget;
 import org.openmrs.module.htmlwidgets.web.html.Widget;
 import org.openmrs.module.htmlwidgets.web.html.WidgetFactory;
+
+import java.io.IOException;
+import java.io.Writer;
 
 /**
  * FieldGenHandler for String Types
@@ -31,7 +34,7 @@ import org.openmrs.module.htmlwidgets.web.html.WidgetFactory;
 public class StringHandler extends WidgetHandler {
 	
 	/** 
-	 * @see WidgetHandler#render(WidgetConfig)
+	 * @see WidgetHandler#render(WidgetConfig, Writer)
 	 */
 	@Override
 	public void render(WidgetConfig config, Writer w) throws IOException {
@@ -43,6 +46,15 @@ public class StringHandler extends WidgetHandler {
 			config.setConfiguredAttribute("size", "2");
 			config.setConfiguredAttribute("maxLength", "1");
 		}
+		else if (StringUtils.isNotBlank(config.getAttributeValue("codedOptions"))) {
+		    CodedWidget codedWidget = WidgetFactory.getInstance(SelectWidget.class, config);
+		    String optionList = config.getAttribute("codedOptions").getValue();
+		    String optionSeparator = config.getAttributeValue("optionSeparator", ",");
+		    for (String o : optionList.split(optionSeparator)) {
+		        codedWidget.addOption(new Option(o, o, o, o), config);
+            }
+		    widget = codedWidget;
+        }
 		else {
 			String rows = config.getAttributeValue("rows");
 			String cols = config.getAttributeValue("cols");
