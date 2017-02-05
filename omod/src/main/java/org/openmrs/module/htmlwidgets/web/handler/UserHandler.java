@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.openmrs.Role;
 import org.openmrs.User;
 import org.openmrs.annotation.Handler;
@@ -95,6 +96,6 @@ public class UserHandler extends CodedHandler {
 	 * @return
 	 */
 	protected String getUserDisplay(User u, WidgetConfig config) {
-		return u.getFamilyName() + ", " + u.getGivenName();
+		return StringEscapeUtils.escapeHtml(u.getFamilyName() + ", " + u.getGivenName());
 	}
 }
