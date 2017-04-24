@@ -14,17 +14,12 @@
 package org.openmrs.module.htmlwidgets.web.controller;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.openmrs.Patient;
-import org.openmrs.Role;
-import org.openmrs.User;
 import org.openmrs.api.context.Context;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -39,7 +34,6 @@ public class PatientSearchController {
 	 */
 	@RequestMapping("/module/htmlwidgets/patientSearch")
 	public void patienSearch(ModelMap model, HttpServletRequest request, HttpServletResponse response,
-	                         @RequestParam(required = false, value = "roles") String roles,
 	                         @RequestParam(required = true, value = "q") String query)
 	    throws Exception {
 		
@@ -47,23 +41,9 @@ public class PatientSearchController {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		if (StringUtils.isNotEmpty(roles)) {
-			List<Role> roleList = new ArrayList<Role>();
-			for (String roleName : roles.split(",")) {
-				roleList.add(Context.getUserService().getRole(roleName));
-			}
-			for (Iterator<User> i = Context.getUserService().getUsers(query, roleList, false).iterator(); i.hasNext();) {
-				User u = i.next();
-				if (u.getPerson() instanceof Patient) {
-					out.print(u.getFamilyName() + ", " + u.getGivenName() + "|" + ((Patient) u.getPerson()).getPatientId()
-					        + (i.hasNext() ? "\n" : ""));
-				}
-			}
-		} else {
-			for (Iterator<Patient> i = Context.getPatientService().getPatients(query).iterator(); i.hasNext();) {
-				Patient p = i.next();
-				out.print(p.getFamilyName() + ", " + p.getGivenName() + "|" + p.getPatientId() + (i.hasNext() ? "\n" : ""));
-			}
+		for (Iterator<Patient> i = Context.getPatientService().getPatients(query).iterator(); i.hasNext();) {
+			Patient p = i.next();
+			out.print(p.getFamilyName() + ", " + p.getGivenName() + "|" + p.getPatientId() + (i.hasNext() ? "\n" : ""));
 		}
 	}
 }

@@ -13,13 +13,10 @@
  */
 package org.openmrs.module.htmlwidgets.web.handler;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.openmrs.Patient;
-import org.openmrs.Role;
-import org.openmrs.User;
 import org.openmrs.annotation.Handler;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.htmlwidgets.web.WidgetConfig;
@@ -40,12 +37,7 @@ public class PatientHandler extends CodedHandler {
 		if (StringUtils.isEmpty(config.getFormat())) {
 			config.setFormat("ajax");
 		}
-		String roleParam = "";
-		String roleCsv = config.getAttributeValue("roles");
-		if (StringUtils.isNotEmpty(roleCsv)) {
-			roleParam = "?roles=" + roleCsv;
-		}
-		config.setDefaultAttribute("ajaxUrl", "/module/htmlwidgets/patientSearch.form" + roleParam);
+		config.setDefaultAttribute("ajaxUrl", "/module/htmlwidgets/patientSearch.form");
 	}
 	
 	/**
@@ -56,21 +48,7 @@ public class PatientHandler extends CodedHandler {
 		
 		if (StringUtils.isNotEmpty(config.getFormat()) && !"ajax".equals(config.getFormat())) {
 			
-			String roleCsv = config.getAttributeValue("roles");
-			List<Patient> patients = null;
-			if (StringUtils.isNotEmpty(roleCsv)) {
-				patients = new ArrayList<Patient>();
-				for (String roleName : roleCsv.split(",")) {
-					Role role = Context.getUserService().getRole(roleName);
-					for (User u : Context.getUserService().getUsersByRole(role)) {
-						if (u.getPerson() instanceof Patient) {
-							patients.add((Patient) u.getPerson());
-						}
-					}
-				}
-			} else {
-				patients = Context.getPatientService().getPatients("");
-			}
+			List<Patient> patients = Context.getPatientService().getPatients("");
 			
 			for (Patient p : patients) {
 				widget.addOption(new Option(p.getId().toString(), getPatientDisplay(p, config), null, p), config);
