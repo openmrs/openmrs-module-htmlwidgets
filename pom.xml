@@ -172,7 +172,7 @@
 					<version>2.5</version>
 					<configuration>
 						<!-- Some tests are locale specific -->
-						<argLine>-Duser.language=en -Duser.region=US</argLine>
+						<argLine>-Duser.language=en -Duser.region=US -Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
 					</configuration>
 				</plugin>
 
