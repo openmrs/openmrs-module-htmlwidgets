@@ -24,7 +24,7 @@ public class PersonSearchController {
     /**
      * User Search
      */
-    @RequestMapping("/module/htmlwidgets/personSearch")
+    @RequestMapping("/module/htmlwidgets/personSearch.form")
     public void personSearch(ModelMap model, HttpServletRequest request, HttpServletResponse response, 
     				@RequestParam(required=false, value="roles") String roles,
 		    		@RequestParam(required=true, value="q") String query) throws Exception {

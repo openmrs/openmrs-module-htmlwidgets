@@ -34,7 +34,7 @@ public class ConceptSearchController {
     /**
      * Concept Search
      */
-    @RequestMapping("/module/htmlwidgets/conceptSearch")
+    @RequestMapping("/module/htmlwidgets/conceptSearch.form")
     public void conceptSearch(ModelMap model, HttpServletRequest request, HttpServletResponse response, 
                               @RequestParam(required=true, value="q") String query,
                               @RequestParam(required=false, value="includeClasses") List<ConceptClass> includeClasses,

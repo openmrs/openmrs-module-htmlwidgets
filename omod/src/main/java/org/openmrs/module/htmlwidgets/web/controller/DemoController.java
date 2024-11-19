@@ -21,7 +21,7 @@ public class DemoController {
     /**
      * Provides demo functionality controller for the widget framework
      */
-    @RequestMapping("/module/htmlwidgets/demonstration")
+    @RequestMapping("/module/htmlwidgets/demonstration.form")
     public void demonstration(ModelMap model, HttpServletRequest request, 
     						  @RequestParam(required=false, value="property") String property,
     						  @RequestParam(required=false, value="format") String format,

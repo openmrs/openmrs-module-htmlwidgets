@@ -32,7 +32,7 @@ public class PatientSearchController {
 	/**
 	 * Patient Search
 	 */
-	@RequestMapping("/module/htmlwidgets/patientSearch")
+	@RequestMapping("/module/htmlwidgets/patientSearch.form")
 	public void patienSearch(ModelMap model, HttpServletRequest request, HttpServletResponse response,
 	                         @RequestParam(required = true, value = "q") String query)
 	    throws Exception {

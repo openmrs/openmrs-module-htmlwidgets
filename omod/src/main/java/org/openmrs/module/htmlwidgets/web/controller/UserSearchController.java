@@ -22,7 +22,7 @@ public class UserSearchController {
     /**
      * User Search
      */
-    @RequestMapping("/module/htmlwidgets/userSearch")
+    @RequestMapping("/module/htmlwidgets/userSearch.form")
     public void userSearch(ModelMap model, HttpServletRequest request, HttpServletResponse response, 
     				@RequestParam(required=false, value="roles") String roles,
 		    		@RequestParam(required=true, value="q") String query) throws Exception {
