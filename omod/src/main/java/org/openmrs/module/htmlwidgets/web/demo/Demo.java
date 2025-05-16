@@ -34,7 +34,6 @@ import org.openmrs.Program;
 import org.openmrs.ProgramWorkflow;
 import org.openmrs.ProgramWorkflowState;
 import org.openmrs.User;
-import org.openmrs.api.PatientSetService.PatientLocationMethod;
 
 /**
  * Demonstration / test bean to encapsulate the properties that can be set
