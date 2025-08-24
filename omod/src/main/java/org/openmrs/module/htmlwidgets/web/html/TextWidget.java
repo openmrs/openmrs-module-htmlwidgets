@@ -10,7 +10,11 @@ public class TextWidget implements Widget {
 	/** 
 	 * @see Widget#render(WidgetConfig)
 	 */
+	@Override
 	public void render(WidgetConfig config, Writer w) throws IOException {
+		
+		Object idPrefix = config.getId();
+		config.setFixedAttribute("onkeyup", "disableButtons('" + idPrefix + "')");
 		String textValue = config.getDefaultValue() == null ? "" : config.getDefaultValue().toString();
 		config.setFixedAttribute("type", "text");
 		config.setDefaultAttribute("value", textValue);

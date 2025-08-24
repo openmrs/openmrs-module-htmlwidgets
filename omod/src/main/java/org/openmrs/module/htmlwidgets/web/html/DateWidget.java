@@ -12,10 +12,14 @@ public class DateWidget implements Widget {
 	/** 
 	 * @see Widget#render(WidgetConfig)
 	 */
+	@Override
 	public void render(WidgetConfig config, Writer w) throws IOException {
 
 		HtmlUtil.renderResource(w, config.getRequest(), "/scripts/calendar/calendar.js");
 		
+		Object idPrefix = config.getId();
+		config.setFixedAttribute("onchange", "disableButtons('" + idPrefix + "')");
+		config.setFixedAttribute("onkeyup", "disableButtons('" + idPrefix + "')");
 		config.setFixedAttribute("size", "10");
 		config.setFixedAttribute("onClick", "showCalendar(this);");
 		
