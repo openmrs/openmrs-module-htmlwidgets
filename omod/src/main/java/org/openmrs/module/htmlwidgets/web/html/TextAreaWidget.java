@@ -13,7 +13,11 @@ public class TextAreaWidget implements Widget {
 	/** 
 	 * @see Widget#render(WidgetConfig)
 	 */
+	@Override
 	public void render(WidgetConfig config, Writer w) throws IOException {
+		
+		Object idPrefix = config.getId();
+		config.setFixedAttribute("onkeyup", "disableButtons('" + idPrefix + "')");
 		config.setDefaultAttribute("cols", "20");
 		config.setDefaultAttribute("rows", "2");
 		HtmlUtil.renderOpenTag(w, "textarea", config.getAttributes());
