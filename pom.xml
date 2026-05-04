@@ -101,7 +101,7 @@
 	</dependencies>
 
 	<properties>
-		<openMRSVersion>2.7.3</openMRSVersion>
+		<openMRSVersion>2.7.9</openMRSVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<MODULE_ID>${project.parent.artifactId}</MODULE_ID>
