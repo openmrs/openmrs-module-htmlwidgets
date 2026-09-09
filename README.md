@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/openmrs/openmrs-module-htmlwidgets.svg?branch=master)](https://travis-ci.org/openmrs/openmrs-module-htmlwidgets)
+[![Build Status](https://github.com/openmrs/openmrs-module-htmlwidgets/actions/workflows/build.yml/badge.svg)](https://github.com/openmrs/openmrs-module-htmlwidgets/actions/workflows/build.yml)
 
 openmrs-module-htmlwidgets
 ==========================
