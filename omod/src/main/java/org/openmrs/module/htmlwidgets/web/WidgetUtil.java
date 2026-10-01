@@ -20,9 +20,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.openmrs.module.htmlwidgets.util.ReflectionUtil;
 import org.openmrs.module.htmlwidgets.web.handler.WidgetHandler;
 import org.openmrs.util.HandlerUtil;

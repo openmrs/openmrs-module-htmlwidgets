@@ -15,7 +15,7 @@ package org.openmrs.module.htmlwidgets.web.handler;
 
 import java.net.URLEncoder;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.openmrs.Concept;
 import org.openmrs.ConceptAnswer;
 import org.openmrs.ConceptClass;

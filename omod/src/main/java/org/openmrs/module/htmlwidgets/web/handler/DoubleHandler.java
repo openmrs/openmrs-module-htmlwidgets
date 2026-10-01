@@ -16,7 +16,7 @@ package org.openmrs.module.htmlwidgets.web.handler;
 import java.io.IOException;
 import java.io.Writer;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.openmrs.annotation.Handler;
 import org.openmrs.module.htmlwidgets.web.WidgetConfig;
 import org.openmrs.module.htmlwidgets.web.html.TextWidget;

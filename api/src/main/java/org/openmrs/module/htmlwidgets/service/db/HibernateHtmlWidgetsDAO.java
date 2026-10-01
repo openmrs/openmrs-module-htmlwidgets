@@ -4,13 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
+import org.apache.commons.lang3.StringUtils;
+import jakarta.persistence.Query;
+import org.hibernate.query.NativeQuery;
 import org.openmrs.api.db.hibernate.DbSessionFactory;  
-import org.hibernate.criterion.Expression;
-import org.hibernate.criterion.Order;
 import org.openmrs.OpenmrsMetadata;
 import org.openmrs.OpenmrsObject;
 import org.openmrs.Retireable;
@@ -36,12 +33,12 @@ public class HibernateHtmlWidgetsDAO implements HtmlWidgetsDAO {
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T extends OpenmrsMetadata> List<T> getAllMetadataByType(Class<T> type, boolean includeRetired) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(type);
+		String hql = "from " + type.getName() + " t";
 		if (!includeRetired) {
-			criteria.add(Expression.eq("retired", false));
+			hql += " where t.retired = false";
 		}
-		criteria.addOrder(Order.asc("name"));
-		return criteria.list();
+		hql += " order by t.name asc";
+		return sessionFactory.getCurrentSession().createQuery(hql).getResultList();
 	}
 
 	/**
@@ -50,14 +47,14 @@ public class HibernateHtmlWidgetsDAO implements HtmlWidgetsDAO {
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T extends OpenmrsObject> List<T> getAllObjectsByType(Class<T> type) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(type);
+		String hql = "from " + type.getName() + " t";
 		if (Retireable.class.isAssignableFrom(type)) {
-			criteria.add(Expression.eq("retired", false));
+			hql += " where t.retired = false";
 		}
 		else if (Voidable.class.isAssignableFrom(type)) {
-			criteria.add(Expression.eq("voided", false));
+			hql += " where t.voided = false";
 		}
-		return criteria.list();
+		return sessionFactory.getCurrentSession().createQuery(hql).getResultList();
 	}
 
 	/**
@@ -98,11 +95,11 @@ public class HibernateHtmlWidgetsDAO implements HtmlWidgetsDAO {
 		hql.append("order by	pn.preferred asc ");
 		Query q = getSessionFactory().getCurrentSession().createQuery(hql.toString());
 		if (limitUserIds != null) {
-			q.setParameterList("limitUserIds", limitUserIds);
+			q.setParameter("limitUserIds", limitUserIds);
 		}
 
 		Map<Integer, String> m = new HashMap<Integer, String>();
-		for (Object o : q.list()) {
+		for (Object o : q.getResultList()) {
 			Object[] row = (Object[])o;
 			m.put((Integer)row[0], row[2] + ", " + row[1]);
 		}
@@ -138,11 +135,11 @@ public class HibernateHtmlWidgetsDAO implements HtmlWidgetsDAO {
 		hql.append("order by	pn.preferred asc ");
 		Query q = getSessionFactory().getCurrentSession().createQuery(hql.toString());
 		if (limitPersonIds != null) {
-			q.setParameterList("limitPersonIds", limitPersonIds);
+			q.setParameter("limitPersonIds", limitPersonIds);
 		}
 
 		Map<Integer, String> m = new HashMap<Integer, String>();
-		for (Object o : q.list()) {
+		for (Object o : q.getResultList()) {
 			Object[] row = (Object[])o;
 			m.put((Integer)row[0], row[1] + ", " + row[2]);
 		}
@@ -158,9 +155,9 @@ public class HibernateHtmlWidgetsDAO implements HtmlWidgetsDAO {
 		List<Integer> limitUserIds = null;
 		if (roleNames != null && roleNames.size() > 0) {
 			String roleQuery = "select user_id from user_role where role in (:roleNames)";
-			SQLQuery sq = sessionFactory.getCurrentSession().createSQLQuery(roleQuery);
+			NativeQuery<Integer> sq = sessionFactory.getCurrentSession().createSQLQuery(roleQuery, Integer.class);
 			sq.setParameterList("roleNames", roleNames);
-			limitUserIds = (List<Integer>)sq.list();
+			limitUserIds = sq.list();
 		}
 		return limitUserIds;
 	}
@@ -174,9 +171,9 @@ public class HibernateHtmlWidgetsDAO implements HtmlWidgetsDAO {
 		List<Integer> limitPersonIds = null;
 		if (roleNames != null && roleNames.size() > 0) {
 			String roleQuery = "select u.person_id from user_role r, users u where u.user_id = r.user_id and r.role in (:roleNames)";
-			SQLQuery sq = sessionFactory.getCurrentSession().createSQLQuery(roleQuery);
+			NativeQuery<Integer> sq = sessionFactory.getCurrentSession().createSQLQuery(roleQuery, Integer.class);
 			sq.setParameterList("roleNames", roleNames);
-			limitPersonIds = (List<Integer>)sq.list();
+			limitPersonIds = sq.list();
 		}
 		return limitPersonIds;
 	}
