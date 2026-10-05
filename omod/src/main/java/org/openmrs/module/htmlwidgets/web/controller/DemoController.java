@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.openmrs.module.htmlwidgets.util.ReflectionUtil;
 import org.openmrs.module.htmlwidgets.web.WidgetUtil;

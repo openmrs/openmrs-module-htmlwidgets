@@ -18,7 +18,7 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.jsp.JspException;
+import jakarta.servlet.jsp.JspException;
 
 import org.openmrs.Location;
 import org.openmrs.annotation.Handler;

@@ -1,6 +1,6 @@
 package org.openmrs.module.htmlwidgets.web.html;
 
-import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.openmrs.api.context.Context;
 
 /**

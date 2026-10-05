@@ -16,7 +16,7 @@ package org.openmrs.module.htmlwidgets.web.handler;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.openmrs.Person;
 import org.openmrs.Role;
 import org.openmrs.User;

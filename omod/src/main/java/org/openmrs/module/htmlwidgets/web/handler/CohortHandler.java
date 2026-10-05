@@ -13,7 +13,7 @@
  */
 package org.openmrs.module.htmlwidgets.web.handler;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.openmrs.Cohort;
 import org.openmrs.annotation.Handler;
 import org.openmrs.api.context.Context;

@@ -47,6 +47,7 @@ public interface HtmlWidgetsService extends OpenmrsService {
 
 	/**
 	 * @return a Map of user ids to names, ordered by name
+	 * @should return only users with the given roles
 	 */
 	@Transactional(readOnly = true)
 	public Map<Integer, String> getUserNamesById(String query, List<String> roleNames);

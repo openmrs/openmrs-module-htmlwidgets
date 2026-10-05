@@ -2,12 +2,14 @@ package org.openmrs.module.htmlwidgets.service;
 
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openmrs.Location;
 import org.openmrs.api.context.Context;
-import org.openmrs.test.BaseModuleContextSensitiveTest;
+import org.openmrs.test.jupiter.BaseModuleContextSensitiveTest;
 
 public class HtmlWidgetsServiceTest extends BaseModuleContextSensitiveTest {
 	
@@ -18,10 +20,20 @@ public class HtmlWidgetsServiceTest extends BaseModuleContextSensitiveTest {
 	@Test
 	public void getAllMetadataByType_shouldReturnOnlyUnretired() throws Exception {
 		List<Location> locations = Context.getService(HtmlWidgetsService.class).getAllMetadataByType(Location.class, false);
-		Assert.assertNotNull(locations);
-		Assert.assertTrue("not empty", locations.size() != 0);
+		Assertions.assertNotNull(locations);
+		Assertions.assertTrue(locations.size() != 0, "not empty");
 		for (Location location : locations) {
-	        Assert.assertFalse(location.getName() + " is retired", location.getRetired());
+	        Assertions.assertFalse(location.getRetired(), location.getName() + " is retired");
         }
+	}
+
+	/**
+	 * @see HtmlWidgetsService#getUserNamesById(String,List)
+	 * @verifies return only users with the given roles
+	 */
+	@Test
+	public void getUserNamesById_shouldReturnOnlyUsersWithTheGivenRoles() throws Exception {
+		Map<Integer, String> names = Context.getService(HtmlWidgetsService.class).getUserNamesById(null, List.of("Provider"));
+		Assertions.assertEquals(Set.of(501, 502), names.keySet());
 	}
 }

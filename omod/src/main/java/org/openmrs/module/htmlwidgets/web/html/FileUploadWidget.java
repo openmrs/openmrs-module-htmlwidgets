@@ -3,7 +3,7 @@ package org.openmrs.module.htmlwidgets.web.html;
 import java.io.IOException;
 import java.io.Writer;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.openmrs.module.htmlwidgets.web.WidgetConfig;
 
 public class FileUploadWidget implements Widget {
