@@ -2,6 +2,8 @@ package org.openmrs.module.htmlwidgets.service;
 
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,5 +25,15 @@ public class HtmlWidgetsServiceTest extends BaseModuleContextSensitiveTest {
 		for (Location location : locations) {
 	        Assertions.assertFalse(location.getRetired(), location.getName() + " is retired");
         }
+	}
+
+	/**
+	 * @see HtmlWidgetsService#getUserNamesById(String,List)
+	 * @verifies return only users with the given roles
+	 */
+	@Test
+	public void getUserNamesById_shouldReturnOnlyUsersWithTheGivenRoles() throws Exception {
+		Map<Integer, String> names = Context.getService(HtmlWidgetsService.class).getUserNamesById(null, List.of("Provider"));
+		Assertions.assertEquals(Set.of(501, 502), names.keySet());
 	}
 }

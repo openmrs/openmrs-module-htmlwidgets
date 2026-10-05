@@ -149,7 +149,6 @@ public class HibernateHtmlWidgetsDAO implements HtmlWidgetsDAO {
 	/**
 	 * @see HtmlWidgetsService#getUserIdsForRoles(List)
 	 */
-	@SuppressWarnings("unchecked")
 	private List<Integer> getUserIdsForRoles(List<String> roleNames) {
 		// Not sure how to join on user_role using hql, so doing it this way for now...
 		List<Integer> limitUserIds = null;
@@ -165,7 +164,6 @@ public class HibernateHtmlWidgetsDAO implements HtmlWidgetsDAO {
 	/**
 	 * @see HtmlWidgetsService#getUserIdsForRoles(List)
 	 */
-	@SuppressWarnings("unchecked")
 	private List<Integer> getPersonIdsForRoles(List<String> roleNames) {
 		// Not sure how to join on user_role using hql, so doing it this way for now...
 		List<Integer> limitPersonIds = null;
